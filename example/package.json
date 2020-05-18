@@ -5,6 +5,7 @@
     "homepage": "https://ansu5555.github.io/pdf-viewer-reactjs/",
     "dependencies": {
         "bootstrap": "^4.4.1",
+        "jquery": "^3.5.1",
         "pdf-viewer-reactjs": "file:..",
         "react": "^16.13.1",
         "react-dom": "^16.13.1"

@@ -232,53 +232,51 @@ class PDFViewer extends React.Component {
     }
     
     return (
-      <div>
-          {
-              !this.state.isReady && loader ? loader
-                :
-                (
-                  <div className={css ? css : 'container text-center'}>
-                      <div>
-                          {navbarOnTop ? (
-                            <div>
-                                <div>{nav}</div>
-                                <div
-                                  className={canvasCss ? canvasCss : ''}
-                                  style={
-                                      canvasCss
-                                        ? {}
-                                        : {
-                                            height: '1000px',
-                                            overflow: 'auto',
-                                        }
-                                  }
-                                  onClick={onDocumentClick}>
-                                    {pdf}
-                                </div>
-                            </div>
-                          ) : (
-                            <div>
-                                <div
-                                  className={canvasCss ? canvasCss : ''}
-                                  style={
-                                      canvasCss
-                                        ? {}
-                                        : {
-                                            height: '1000px',
-                                            overflow: 'auto',
-                                        }
-                                  }
-                                  onClick={onDocumentClick}>
-                                    {pdf}
-                                </div>
-                                <div>{nav}</div>
-                            </div>
-                          )}
-                      </div>
-                  </div>
-                )
-          }
-        
+      <div className={css ? css : 'container text-center'}>
+        <div style={{display: this.state.isReady ? 'none' : 'block'}}>
+          <div
+            className={css && css.loader ? css.loader : ''}
+          >
+            {loader ? loader : <Loader/>}
+          </div>
+        </div>
+        <div style={{display: this.state.isReady ? 'block' : 'none'}}>
+          {navbarOnTop ? (
+            <div>
+              <div>{nav}</div>
+              <div
+                className={canvasCss ? canvasCss : ''}
+                style={
+                  canvasCss
+                    ? {}
+                    : {
+                      height: '1000px',
+                      overflow: 'auto',
+                    }
+                }
+                onClick={onDocumentClick}>
+                {pdf}
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div
+                className={canvasCss ? canvasCss : ''}
+                style={
+                  canvasCss
+                    ? {}
+                    : {
+                      height: '1000px',
+                      overflow: 'auto',
+                    }
+                }
+                onClick={onDocumentClick}>
+                {pdf}
+              </div>
+              <div>{nav}</div>
+            </div>
+          )}
+        </div>
       </div>
     )
   }
