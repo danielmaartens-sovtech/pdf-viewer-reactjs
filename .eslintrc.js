@@ -4,7 +4,7 @@ module.exports = {
         es6: true,
         node: true,
     },
-    extends: ['plugin:react/recommended', 'plugin:prettier/recommended'],
+    extends: ['plugin:react/recommended'],
     globals: {
         Atomics: 'readonly',
         SharedArrayBuffer: 'readonly',
@@ -16,10 +16,7 @@ module.exports = {
         ecmaVersion: 2018,
         sourceType: 'module',
     },
-    plugins: ['react', 'prettier'],
-    rules: {
-        'prettier/prettier': 'error',
-    },
+    plugins: ['react'],
     settings: {
         react: {
             version: 'detect',
