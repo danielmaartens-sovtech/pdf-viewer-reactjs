@@ -164,6 +164,7 @@ class PDFViewer extends React.Component {
       protectContent,
       watermark,
       alert,
+      children
     } = this.props
     
     const {page, pages, scale, defaultScale, rotationAngle} = this.state
@@ -250,6 +251,7 @@ class PDFViewer extends React.Component {
                 onClick={onDocumentClick}>
                 {pdf}
               </div>
+              {children}
             </div>
           ) : (
             <div>
@@ -267,6 +269,7 @@ class PDFViewer extends React.Component {
                 {pdf}
               </div>
               <div>{nav}</div>
+              {children}
             </div>
           )}
         </div>
@@ -280,7 +283,7 @@ PDFViewer.propTypes = {
     url: PropTypes.string, // File path
     base64: PropTypes.string, // PDF file encoded in base64
   }).isRequired,
-  
+  children: PropTypes.node,
   loader: PropTypes.node,
   page: PropTypes.number,
   scale: PropTypes.number,
