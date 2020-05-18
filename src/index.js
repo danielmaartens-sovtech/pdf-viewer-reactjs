@@ -233,13 +233,6 @@ class PDFViewer extends React.Component {
     
     return (
       <div className={css ? css : 'container text-center'}>
-        <div style={{display: this.state.isReady ? 'none' : 'block'}}>
-          <div
-            className={css && css.loader ? css.loader : ''}
-          >
-            {loader ? loader : <Loader/>}
-          </div>
-        </div>
         <div style={{display: this.state.isReady ? 'block' : 'none'}}>
           {navbarOnTop ? (
             <div>
