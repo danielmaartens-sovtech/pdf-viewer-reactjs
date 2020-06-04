@@ -15,6 +15,8 @@ class PDFViewer extends React.Component {
       page: this.props.page,
       pages: 0,
       scale: this.props.scale,
+      height: this.props.height,
+      width: this.props.width,
       defaultScale: this.props.scale,
       rotationAngle: this.props.rotationAngle,
       isReady: false,
@@ -167,7 +169,7 @@ class PDFViewer extends React.Component {
       children
     } = this.props
     
-    const {page, pages, scale, defaultScale, rotationAngle} = this.state
+    const {page, pages, scale, height, width, defaultScale, rotationAngle} = this.state;
     
     const NavigationElement = navigation
     
@@ -176,6 +178,8 @@ class PDFViewer extends React.Component {
         src={source}
         pageNum={page}
         scale={scale}
+        height={height}
+        width={width}
         rotation={rotationAngle}
         pageCount={num => this.getPageCount(num)}
         protectContent={protectContent}
@@ -287,6 +291,8 @@ PDFViewer.propTypes = {
   loader: PropTypes.node,
   page: PropTypes.number,
   scale: PropTypes.number,
+  height: PropTypes.number,
+  width: PropTypes.number,
   scaleStep: PropTypes.number,
   maxScale: PropTypes.number,
   minScale: PropTypes.number,

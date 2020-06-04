@@ -12,6 +12,8 @@ const RenderPdf = ({
     src,
     pageNum,
     scale,
+    height,
+    width,
     rotation,
     pageCount,
     protectContent,
@@ -21,15 +23,35 @@ const RenderPdf = ({
     const [error, setError] = useState({ status: false, message: '' })
     const canvasRef = useRef(null)
 
-    const AlertComponent = alert ? alert : Alert
+    const AlertComponent = alert ? alert : Alert;
+    
+    const getScale = (page) => {
+        
+        // Be default, we'll render page at 100% * scale width.
+        let pageScale = 1;
+        
+        // Passing scale explicitly null would cause the page not to render
+        const scaleWithDefault = scale === null ? 1 : scale;
+        
+        // If width/height is defined, calculate the scale of the page so it could be of desired width.
+        if (width || height) {
+            const viewport = page.getViewport({ scale: 1, rotation: rotation });
+            pageScale = width
+              ? width / viewport.width
+              : height / viewport.height;
+        }
+        
+        return scaleWithDefault * pageScale;
+    };
 
     const fetchPDF = async () => {
         // Get PDF file
         try {
             pdf = await pdfjs.getDocument(src).promise
             try {
-                const page = await pdf.getPage(pageNum)
-                const viewport = page.getViewport({ scale, rotation })
+                const page = await pdf.getPage(pageNum);
+                const _scale = getScale(page);
+                const viewport = page.getViewport({ scale: _scale, rotation });
 
                 // Prepare canvas using PDF page dimensions
                 const canvas = canvasRef.current
@@ -98,11 +120,11 @@ const RenderPdf = ({
                 message: 'Error while opening the document !',
             })
         }
-    }
+    };
 
     useEffect(() => {
         fetchPDF()
-    }, [src, pageNum, scale, rotation, pageCount])
+    }, [src, pageNum, scale, height, width, rotation, pageCount]);
 
     if (error.status) {
         pageCount(-1)
@@ -124,7 +146,7 @@ const RenderPdf = ({
 RenderPdf.propTypes = {
     src: PropTypes.any.isRequired,
     pageNum: PropTypes.number.isRequired,
-    scale: PropTypes.number.isRequired,
+    scale: PropTypes.number,
     rotation: PropTypes.number.isRequired,
     pageCount: PropTypes.func,
     protectContent: PropTypes.bool,
