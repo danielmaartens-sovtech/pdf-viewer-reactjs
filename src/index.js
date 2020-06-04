@@ -236,6 +236,9 @@ class PDFViewer extends React.Component {
         )
     }
     
+    console.log({pdfIsReady: this.state.isReady});
+    console.log({loader});
+    
     return (
       <div className={css ? css : 'container text-center'}>
         {
