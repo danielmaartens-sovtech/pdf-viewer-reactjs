@@ -238,45 +238,51 @@ class PDFViewer extends React.Component {
     
     return (
       <div className={css ? css : 'container text-center'}>
-        <div style={{display: this.state.isReady ? 'block' : 'none'}}>
-          {navbarOnTop ? (
-            <div>
-              <div>{nav}</div>
-              <div
-                className={canvasCss ? canvasCss : ''}
-                style={
-                  canvasCss
-                    ? {}
-                    : {
-                      height: '1000px',
-                      overflow: 'auto',
-                    }
-                }
-                onClick={onDocumentClick}>
-                {pdf}
+        {
+          this.state.isReady ? (
+              <div style={{display: 'block'}}>
+                {navbarOnTop ? (
+                  <div>
+                    <div>{nav}</div>
+                    <div
+                      className={canvasCss ? canvasCss : ''}
+                      style={
+                        canvasCss
+                          ? {}
+                          : {
+                            height: '1000px',
+                            overflow: 'auto',
+                          }
+                      }
+                      onClick={onDocumentClick}>
+                      {pdf}
+                    </div>
+                    {children}
+                  </div>
+                ) : (
+                  <div>
+                    <div
+                      className={canvasCss ? canvasCss : ''}
+                      style={
+                        canvasCss
+                          ? {}
+                          : {
+                            height: '1000px',
+                            overflow: 'auto',
+                          }
+                      }
+                      onClick={onDocumentClick}>
+                      {pdf}
+                    </div>
+                    <div>{nav}</div>
+                    {children}
+                  </div>
+                )}
               </div>
-              {children}
-            </div>
-          ) : (
-            <div>
-              <div
-                className={canvasCss ? canvasCss : ''}
-                style={
-                  canvasCss
-                    ? {}
-                    : {
-                      height: '1000px',
-                      overflow: 'auto',
-                    }
-                }
-                onClick={onDocumentClick}>
-                {pdf}
-              </div>
-              <div>{nav}</div>
-              {children}
-            </div>
-          )}
-        </div>
+            )
+            :
+            loader
+        }
       </div>
     )
   }
