@@ -33,7 +33,6 @@ class PDFViewer extends React.Component {
   }
   
   getPageCount(pages) {
-    console.log({pages});
     if (this.state.pages !== pages) {
       this.setState({pages, isReady: true})
     }
@@ -236,9 +235,6 @@ class PDFViewer extends React.Component {
           />
         )
     }
-    
-    console.log({pdfIsReady: this.state.isReady});
-    console.log({loader});
     
     return (
       <div className={css ? css : 'container text-center'}>
