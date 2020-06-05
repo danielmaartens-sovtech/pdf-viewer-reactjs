@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import pdfjs from 'pdfjs-dist'
 import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.entry'
@@ -44,7 +44,7 @@ const RenderPdf = ({
         return scaleWithDefault * pageScale;
     };
 
-    const fetchPDF = async () => {
+    const fetchPDF = useCallback(async () => {
         // Get PDF file
         try {
             pdf = await pdfjs.getDocument(src).promise
@@ -120,11 +120,11 @@ const RenderPdf = ({
                 message: 'Error while opening the document !',
             })
         }
-    };
+    }, [src, pageNum, scale, height, width, rotation, pageCount]);
 
     useEffect(() => {
         fetchPDF()
-    }, [src, pageNum, scale, height, width, rotation, pageCount]);
+    }, [fetchPDF]);
 
     if (error.status) {
         pageCount(-1)
