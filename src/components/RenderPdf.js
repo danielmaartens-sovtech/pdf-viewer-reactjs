@@ -123,7 +123,16 @@ const RenderPdf = ({
     }, [src, pageNum, scale, height, width, rotation, pageCount]);
 
     useEffect(() => {
-        fetchPDF()
+        let isCancelled = false;
+        
+        if (!isCancelled) {
+            fetchPDF()
+        }
+        
+        return () => {
+            isCancelled = true;
+        }
+        
     }, [fetchPDF]);
 
     if (error.status) {
