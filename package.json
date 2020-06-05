@@ -7,7 +7,7 @@
     "types": "./index.d.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" ",
-        "lint": "node_modules/.bin/eslint --fix ./src/*.js ./src/**/*.js ./example/src/*.js ./example/src/**/*.js",
+        "lint": "node_modules/.bin/eslint --fix ./src/*.js ./src/**/*.js",
         "prebuild": "npm run lint",
         "build": "rollup -c",
         "prepublish": "npm run build"
