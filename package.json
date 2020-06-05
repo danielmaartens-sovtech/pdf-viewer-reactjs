@@ -56,8 +56,7 @@
     "dependencies": {
         "material-design-icons": "3.0.1",
         "pdfjs-dist": "2.3.200",
-        "prop-types": "15.7.2",
-        "react": "16.13.1"
+        "prop-types": "15.7.2"
     },
     "husky": {
         "hooks": {
